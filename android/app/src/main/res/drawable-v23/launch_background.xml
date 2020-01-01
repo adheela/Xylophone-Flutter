@@ -4,6 +4,6 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:drawable="@color/app_bg" />
-
+    <item android:gravity="center" android:drawable="@mipmap/ic_launcher"/>
 
 </layer-list>
