@@ -18,7 +18,7 @@ class InfoWidget extends StatelessWidget {
         duration: 300.ms,
         opacity: () {
           final playEvent = ScopedModel.of<PlayEvent>(context, rebuildOnChange: true);
-          return playEvent.x3value ? 0.35 : (playEvent.x1value ? 0.5 : 0.75);
+          return playEvent.x3value ? 0.3 : (playEvent.x1value ? 0.5 : 0.75);
         }(),
         child: RichText(
           textAlign: TextAlign.center,

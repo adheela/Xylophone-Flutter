@@ -3,13 +3,13 @@ import 'dart:ui';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/material.dart';
 
-import 'main.dart';
+import 'main.dart' show XYLOPHONE_COLOR;
 
 const _EDGE = 7;
-
 final _color = XYLOPHONE_COLOR;
-final  audios = List.generate(_EDGE, (i)=> Audio("note${_EDGE-i}.wav", [_color[(i+1)*100], _color.shade900]), growable: false);
-final _players = Map.fromEntries(audios.map((audio)=>MapEntry(audio, AudioCache())).toList(growable: false));
+final _player = AudioCache();
+
+final audios = List.generate(_EDGE, (i)=> Audio("note${_EDGE-i}.wav", [_color[(i+1)*100], _color.shade900]));
 
 class Audio {
   final String name;
@@ -20,6 +20,10 @@ class Audio {
 
 extension AudioExt on Audio {
 
-  void play() => _players[this].play(this.name);
+  void play() => _player.play(this.name);
+
+  static void preLoad() {
+    _player.loadAll(audios.map((audio)=>audio.name).toList(growable: false));
+  }
 
 }
