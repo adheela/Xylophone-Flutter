@@ -6,7 +6,6 @@ extension InsetsList on List<int> {
 }
 
 extension InsetsInt on int {
-  Insets get insets => Insets.of(this);
 }
 
 class Insets {
@@ -20,6 +19,7 @@ class Insets {
 
   get topBottom => EdgeInsetsDirectional.only(top: list[0].toDouble(), bottom: list[1].toDouble());
   get startEnd  => EdgeInsetsDirectional.only(start: list[0].toDouble(), end: list[1].toDouble());
+  get vertHorz  => EdgeInsets.symmetric(vertical: list[0].toDouble(), horizontal: list[1].toDouble());
   get steb      => EdgeInsetsDirectional.fromSTEB(list[0].toDouble(), list[1].toDouble(), list[2].toDouble(), list[3].toDouble());
 
   get all   => EdgeInsets.all(value);

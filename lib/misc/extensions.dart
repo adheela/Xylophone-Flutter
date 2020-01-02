@@ -14,3 +14,12 @@ extension DurationExt on int {
   Duration get  ms => Duration(milliseconds: this);
   Duration get sec => Duration(seconds: this);
 }
+
+extension StringExt on String {
+
+  String fromAssets() => 'assets/$this';
+
+  String repeat(int times, {String separator = ""})
+  => List.filled(times, this).join(separator);
+
+}

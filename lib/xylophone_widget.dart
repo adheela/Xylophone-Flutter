@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
-import 'misc/audio.dart';
+import 'audio.dart';
+import 'play_event.dart';
 
 class XylophoneWidget extends StatelessWidget {
 
@@ -9,28 +11,45 @@ class XylophoneWidget extends StatelessWidget {
     final mq = MediaQuery.of(context);
     final children = audios.map((audio) =>
       Expanded(
-        child: Material(color: audio.color,
-          elevation: 3,
-          child: InkResponse(
-            splashColor: Colors.black.withAlpha(35),
-            radius: mq.size.height,
-            onTap: ()=> player.play(audio.name),
-            child: Container(),
-          )
+        child: Stack(
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: audio.colors,
+                  begin: Alignment.topRight,
+                  end:  Alignment.bottomCenter,
+                )
+              ),
+            ),
+            Material(
+              child: InkResponse(
+                splashColor: Colors.black.withAlpha(35),
+                radius: mq.size.height,
+                onTap: () => _onTap(context, audio)
+              ),
+              color: Colors.transparent
+            ),
+          ],
         ),
       )
     ).toList(growable: false);
-    var panItem;
+    var curPanIndex;
     return GestureDetector(
       onPanUpdate: (DragUpdateDetails d) {
-        final newValue = d.localPosition.dx ~/ (mq.size.width / children.length);
-        if (panItem != newValue) {
-          player.play(audios[newValue].name);
-          panItem = newValue;
+        final newPanIndex = d.localPosition.dx ~/ (mq.size.width / children.length);
+        if (curPanIndex != newPanIndex) {
+          _onTap(context, audios[newPanIndex]);
+          curPanIndex = newPanIndex;
         }
       },
       child: Row(children: children),
     );
+  }
+
+  _onTap(BuildContext context, Audio audio) {
+    ScopedModel.of<PlayEvent>(context, rebuildOnChange: false).fire();
+    audio.play();
   }
 
 }
