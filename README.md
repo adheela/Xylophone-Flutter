@@ -1,7 +1,11 @@
-![App Brewery Banner](https://github.com/londonappbrewery/Images/blob/master/AppBreweryBanner.png)
 
+![Screenshot1](screenshots/xylophone-screen1.png)
+![Screenshot2](screenshots/xylophone-screen2.png)
 
 # Xylophone 🎹
+
+![App Brewery Banner](https://github.com/londonappbrewery/Images/blob/master/AppBreweryBanner.png)
+
 
 ## Our Goal
 
