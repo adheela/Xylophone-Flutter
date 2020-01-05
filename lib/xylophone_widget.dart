@@ -17,7 +17,12 @@ class XylophoneWidget extends StatelessWidget {
               colors: audio.colors,
               begin: Alignment.topRight,
               end: Alignment.bottomCenter,
-            )
+            ),
+          ),
+          child: MaterialButton(
+            onPressed: () {},
+            minWidth: double.maxFinite,
+            height: double.maxFinite,
           ),
         ),
       )
