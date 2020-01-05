@@ -8,9 +8,9 @@ import 'xylophone_widget.dart';
 
 const XYLOPHONE_COLOR = Colors.purple;
 
-void main() {
-  AudioExt.preLoad();
+main() {
   runApp(XylophoneApp());
+  AudioExt.preLoad();
 }
 
 class XylophoneApp extends StatelessWidget {
