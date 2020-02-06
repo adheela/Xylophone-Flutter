@@ -6,6 +6,7 @@ extension InsetsList on List<int> {
 }
 
 extension InsetsInt on int {
+  Insets get insets => Insets.of(this);
 }
 
 class Insets {
