@@ -1,36 +1,46 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:scoped_model/scoped_model.dart';
+import 'package:audioplayers/audio_cache.dart';
 
-import 'audio.dart' show AudioExt;
-import 'info_widget.dart';
-import 'play_event.dart';
-import 'xylophone_widget.dart';
-
-const XYLOPHONE_COLOR = Colors.purple;
-
-main() {
-  runApp(XylophoneApp());
-  AudioExt.preLoad();
-}
+void main() => runApp(XylophoneApp());
 
 class XylophoneApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) =>
-     MaterialApp(
-       home: Scaffold(
-         body: ScopedModel<PlayEvent>(
-           model: PlayEvent(),
-           child: Stack(
-             children: [
-               XylophoneWidget(),
-               InfoWidget(),
-             ]
-           ),
-         )
-       ),
-       themeMode: ThemeMode.dark,
-       theme: ThemeData.dark(),
-       debugShowCheckedModeBanner: false,
-    );
+  void sound(int n) {
+    final player = AudioCache();
+    player.play('note$n.wav');
+  }
 
+  Expanded buildkey({Color color, int n}) {
+    return Expanded(
+      child: FlatButton(
+        color: color,
+        onPressed: () {
+          sound(n);
+        },
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.black,
+        body: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              buildkey(color: Colors.red, n: 1),
+              buildkey(color: Colors.green, n: 2),
+              buildkey(color: Colors.orange, n: 3),
+              buildkey(color: Colors.blue, n: 4),
+              buildkey(color: Colors.yellowAccent, n: 5),
+              buildkey(color: Colors.pink, n: 6),
+              buildkey(color: Colors.indigo, n: 7),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
